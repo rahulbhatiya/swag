@@ -319,69 +319,69 @@ paths:
       tags:
       - accounts
       - admin
-  /bottles:
-    get:
-      consumes:
-      - application/json
-      description: get bottles
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/model.Bottle'
-            type: array
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-      summary: List bottles
-      tags:
-      - bottles
-  /bottles/{id}:
-    get:
-      consumes:
-      - application/json
-      description: get string by ID
-      operationId: get-string-by-int
-      parameters:
-      - description: Bottle ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.Bottle'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/httputil.HTTPError'
-      summary: Show a bottle
-      tags:
-      - bottles
+  # /bottles:
+  #   get:
+  #     consumes:
+  #     - application/json
+  #     description: get bottles
+  #     produces:
+  #     - application/json
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         schema:
+  #           items:
+  #             $ref: '#/definitions/model.Bottle'
+  #           type: array
+  #       "400":
+  #         description: Bad Request
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #       "404":
+  #         description: Not Found
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #       "500":
+  #         description: Internal Server Error
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #     summary: List bottles
+  #     tags:
+  #     - bottles
+  # /bottles/{id}:
+  #   get:
+  #     consumes:
+  #     - application/json
+  #     description: get string by ID
+  #     operationId: get-string-by-int
+  #     parameters:
+  #     - description: Bottle ID
+  #       in: path
+  #       name: id
+  #       required: true
+  #       type: integer
+  #     produces:
+  #     - application/json
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         schema:
+  #           $ref: '#/definitions/model.Bottle'
+  #       "400":
+  #         description: Bad Request
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #       "404":
+  #         description: Not Found
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #       "500":
+  #         description: Internal Server Error
+  #         schema:
+  #           $ref: '#/definitions/httputil.HTTPError'
+  #     summary: Show a bottle
+  #     tags:
+  #     - bottles
   /examples/attribute:
     get:
       consumes:
