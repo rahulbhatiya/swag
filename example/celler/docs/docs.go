@@ -24,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/accounts": {
+        "/ListReleaseBundles": {
             "get": {
                 "description": "get Releasebundles",
                 "consumes": [
@@ -34,7 +34,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "accounts"
+                    "ListReleaseBundles"
                 ],
                 "summary": "List ReleaseBundles",
                 "responses": {

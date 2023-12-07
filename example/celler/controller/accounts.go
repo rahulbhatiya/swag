@@ -41,14 +41,14 @@ import (
 //
 //	@Summary		List ReleaseBundles
 //	@Description	get Releasebundles
-//	@Tags			accounts
+//	@Tags			ListReleaseBundles
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	controller.ArtifactoryReleaseBundleSummary
 //	@Failure		400	{object}	httputil.HTTPError
 //	@Failure		404	{object}	httputil.HTTPError
 //	@Failure		500	{object}	httputil.HTTPError
-//	@Router			/accounts [get]
+//	@Router			/ListReleaseBundles [get]
 func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	// q := ctx.Request.URL.Query().Get("q")
 	// accounts, err := model.AccountsAll(q)

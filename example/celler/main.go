@@ -63,10 +63,10 @@ func main() {
 
 	v1 := r.Group("/api/v1")
 	{
-		accounts := v1.Group("/accounts")
+		ListReleaseBundles := v1.Group("/ListReleaseBundles")
 		{
 			// accounts.GET(":id", c.ShowAccount)
-			accounts.GET("", c.ListReleaseBundles)
+			ListReleaseBundles.GET("", c.ListReleaseBundles)
 			// accounts.POST("", c.AddAccount)
 			// accounts.DELETE(":id", c.DeleteAccount)
 			// accounts.PATCH(":id", c.UpdateAccount)
