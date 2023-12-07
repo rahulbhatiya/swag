@@ -44,8 +44,7 @@ import (
 //	@Tags			accounts
 //	@Accept			json
 //	@Produce		json
-//	@Param			q	query		string	false	"name search by q"	Format(email)
-//	@Success		200	{array}		model.Account
+//	@Success		200	{object}	controller.ArtifactoryReleaseBundleSummary
 //	@Failure		400	{object}	httputil.HTTPError
 //	@Failure		404	{object}	httputil.HTTPError
 //	@Failure		500	{object}	httputil.HTTPError

@@ -37,23 +37,11 @@ const docTemplate = `{
                     "accounts"
                 ],
                 "summary": "List ReleaseBundles",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "format": "email",
-                        "description": "name search by q",
-                        "name": "q",
-                        "in": "query"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.Account"
-                            }
+                            "$ref": "#/definitions/controller.ArtifactoryReleaseBundleSummary"
                         }
                     },
                     "400": {
@@ -79,6 +67,26 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "controller.ArtifactoryReleaseBundleSummary": {
+            "type": "object",
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
         "httputil.HTTPError": {
             "type": "object",
             "properties": {
@@ -89,25 +97,6 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "status bad request"
-                }
-            }
-        },
-        "model.Account": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "account name"
-                },
-                "uuid": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "550e8400-e29b-41d4-a716-446655440000"
                 }
             }
         }
