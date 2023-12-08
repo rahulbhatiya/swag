@@ -13,9 +13,9 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-//	@title			Swagger Example API
+//	@title			Release Bundles API
 //	@version		1.0
-//	@description	This is a sample server celler server.
+//	@description	APIs for Listing and Deleting the Artifactory Release Bundles.
 //	@termsOfService	http://swagger.io/terms/
 
 //	@contact.name	API Support
