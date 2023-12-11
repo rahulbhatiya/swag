@@ -37,6 +37,20 @@ const docTemplate = `{
                     "ListReleaseBundles"
                 ],
                 "summary": "List ReleaseBundles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "UserName",
+                        "name": "username",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Password",
+                        "name": "pwd",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
