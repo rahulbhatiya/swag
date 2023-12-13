@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/swag/example/celler/model"
 )
 
 // ShowAccount godoc
@@ -46,7 +47,7 @@ import (
 //	@Produce		json
 //	@Param			username	query	string  false	"UserName"
 //	@Param			pwd	        query	string  false	"Password"
-//	@Success		200	{object}	controller.ArtifactoryReleaseBundleSummary
+//	@Success		200	{object}	model.ArtifactoryReleaseBundleSummary
 //	@Failure		400	{object}	httputil.HTTPError
 //	@Failure		404	{object}	httputil.HTTPError
 //	@Failure		500	{object}	httputil.HTTPError
@@ -86,18 +87,18 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	// 	return nil, err
 	// }
 
-	var r ArtifactoryReleaseBundles
+	var r model.ArtifactoryReleaseBundles
 	err = json.Unmarshal(body, &r)
 	if err != nil {
 		fmt.Errorf("cannot parse Artifactory response to list target bundles: %s", err)
 	}
 
-	var foundBundles []ArtifactoryReleaseBundleSummary
+	var foundBundles []model.ArtifactoryReleaseBundleSummary
 
 	for name, versions := range r.Bundles {
 		for _, v := range versions {
 			foundBundles = append(foundBundles,
-				ArtifactoryReleaseBundleSummary{
+				model.ArtifactoryReleaseBundleSummary{
 					Name:    name,
 					Version: v.Version,
 					Status:  v.Status.String(),
@@ -130,6 +131,9 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 //	@Tags			DeleteReleaseBundles
 //	@Accept			json
 //	@Produce		json
+//	@Param			username	query	string  false	"UserName"
+//	@Param			pwd	        query	string  false	"Password"
+//	@Param			bundlever	query	string  false	"Bundle Version"
 //	@Success		200	{object}	controller.ArtifactoryReleaseBundleSummary
 //	@Failure		400	{object}	httputil.HTTPError
 //	@Failure		404	{object}	httputil.HTTPError
@@ -139,10 +143,13 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 // 	// q := ctx.Request.URL.Query().Get("q")
 // 	// accounts, err := model.AccountsAll(q)
 
+// 	username := ctx.Request.URL.Query().Get("username")
+// 	pwd := ctx.Request.URL.Query().Get("pwd")
+
 // 	fmt.Println("Deleting Release Bundles List...")
 
 // 	// make GET request to API to get user by ID
-// 	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles"
+// 	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles/%s"
 // 	// request, error := http.NewRequest("GET", apiUrl, nil)
 // 	request, error := http.NewRequestWithContext(ctx, "GET", apiUrl, http.NoBody)
 
@@ -203,31 +210,6 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 
 // 	ctx.JSON(http.StatusOK, foundBundles)
 // }
-
-type ArtifactoryReleaseBundleSummary struct {
-	Name    string
-	Version string
-	Created string
-	Status  string
-	Type    string
-}
-
-// BundleVersionStatus is an alias type for bundles statuses defined below
-type BundleVersionStatus string
-
-func (s *BundleVersionStatus) String() string { return string(*s) }
-
-// ArtifactoryReleaseBundles is a set of bundles in an Artifactory response
-type ArtifactoryReleaseBundles struct {
-	Bundles map[string][]ArtifactoryReleaseBundleVersionStatus
-}
-
-// ArtifactoryReleaseBundleVersionStatus descripes a release bundle version in Artifactory response
-type ArtifactoryReleaseBundleVersionStatus struct {
-	Version string              `json:"version"`
-	Created string              `json:"created"`
-	Status  BundleVersionStatus `json:"status"`
-}
 
 // AccountsAll example
 // func AccountsAll(q string) ([]Account, error) {

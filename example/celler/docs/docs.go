@@ -55,7 +55,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.ArtifactoryReleaseBundleSummary"
+                            "$ref": "#/definitions/model.ArtifactoryReleaseBundleSummary"
                         }
                     },
                     "400": {
@@ -81,7 +81,20 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "controller.ArtifactoryReleaseBundleSummary": {
+        "httputil.HTTPError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status bad request"
+                }
+            }
+        },
+        "model.ArtifactoryReleaseBundleSummary": {
             "type": "object",
             "properties": {
                 "created": {
@@ -98,19 +111,6 @@ const docTemplate = `{
                 },
                 "version": {
                     "type": "string"
-                }
-            }
-        },
-        "httputil.HTTPError": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 400
-                },
-                "message": {
-                    "type": "string",
-                    "example": "status bad request"
                 }
             }
         }
