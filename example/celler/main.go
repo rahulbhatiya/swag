@@ -28,34 +28,6 @@ import (
 //	@host		localhost:8080
 //	@BasePath	/api/v1
 
-//	@securityDefinitions.basic	BasicAuth
-
-//	@securityDefinitions.apikey	ApiKeyAuth
-//	@in							header
-//	@name						Authorization
-//	@description				Description for what is this security definition being used
-
-//	@securitydefinitions.oauth2.application	OAuth2Application
-//	@tokenUrl								https://example.com/oauth/token
-//	@scope.write							Grants write access
-//	@scope.admin							Grants read and write access to administrative information
-
-//	@securitydefinitions.oauth2.implicit	OAuth2Implicit
-//	@authorizationUrl						https://example.com/oauth/authorize
-//	@scope.write							Grants write access
-//	@scope.admin							Grants read and write access to administrative information
-
-//	@securitydefinitions.oauth2.password	OAuth2Password
-//	@tokenUrl								https://example.com/oauth/token
-//	@scope.read								Grants read access
-//	@scope.write							Grants write access
-//	@scope.admin							Grants read and write access to administrative information
-
-//	@securitydefinitions.oauth2.accessCode	OAuth2AccessCode
-//	@tokenUrl								https://example.com/oauth/token
-//	@authorizationUrl						https://example.com/oauth/authorize
-//	@scope.admin							Grants read and write access to administrative information
-
 func main() {
 	r := gin.Default()
 
@@ -65,32 +37,8 @@ func main() {
 	{
 		ListReleaseBundles := v1.Group("/ListReleaseBundles")
 		{
-			// accounts.GET(":id", c.ShowAccount)
 			ListReleaseBundles.GET("", c.ListReleaseBundles)
-			// accounts.POST("", c.AddAccount)
-			// accounts.DELETE(":id", c.DeleteAccount)
-			// accounts.PATCH(":id", c.UpdateAccount)
-			// accounts.POST(":id/images", c.UploadAccountImage)
 		}
-		// bottles := v1.Group("/bottles")
-		// {
-		// 	// bottles.GET(":id", c.ShowBottle)
-		// 	// bottles.GET("", c.ListBottles)
-		// }
-		// admin := v1.Group("/admin")
-		// {
-		// 	admin.Use(auth())
-		// 	admin.POST("/auth", c.Auth)
-		// }
-		// examples := v1.Group("/examples")
-		// {
-		// 	// examples.GET("ping", c.PingExample)
-		// 	// examples.GET("calc", c.CalcExample)
-		// 	// examples.GET("groups/:group_id/accounts/:account_id", c.PathParamsExample)
-		// 	// examples.GET("header", c.HeaderExample)
-		// 	// examples.GET("securities", c.SecuritiesExample)
-		// 	// examples.GET("attribute", c.AttributeExample)
-		// }
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
