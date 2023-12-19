@@ -36,9 +36,9 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	// request, error := http.NewRequest("GET", apiUrl, nil)
 	request, error := http.NewRequestWithContext(ctx, "GET", apiUrl, http.NoBody)
 
-	// if error != nil {
-	// 	fmt.Println(error)
-	// }
+	if error != nil {
+		fmt.Println(error)
+	}
 
 	request.Header.Set("Content-Type", "application/json; charset=utf-8")
 	request.SetBasicAuth(username, pwd)
@@ -46,9 +46,9 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	client := &http.Client{}
 	response, error := client.Do(request)
 
-	// if error != nil {
-	// 	fmt.Println(error)
-	// }
+	if error != nil {
+		fmt.Println(error)
+	}
 
 	// responseBody, error := ioutil.ReadAll(response.Body)
 
