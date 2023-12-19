@@ -78,6 +78,67 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/VerDeleteReleaseBundles": {
+            "delete": {
+                "description": "DELETE Releasebundles",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "DeleteReleaseBundles"
+                ],
+                "summary": "Delete ReleaseBundles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "UserName",
+                        "name": "username",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Password",
+                        "name": "pwd",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Bundle Version",
+                        "name": "bundlever",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
