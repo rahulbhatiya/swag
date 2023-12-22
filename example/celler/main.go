@@ -1,9 +1,13 @@
 package main
 
 import (
+	"errors"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/swag/example/celler/controller"
 	_ "github.com/swaggo/swag/example/celler/docs"
+	"github.com/swaggo/swag/example/celler/httputil"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -34,9 +38,23 @@ func main() {
 		ListReleaseBundles := v1.Group("/ListReleaseBundles")
 		{
 			ListReleaseBundles.GET("", c.ListReleaseBundles)
-			ListReleaseBundles.DELETE(":id", c.VerDeleteReleaseBundles)
+		}
+
+		VerDeleteReleaseBundles := v1.Group("/VerDeleteReleaseBundles")
+		{
+			VerDeleteReleaseBundles.DELETE("", c.VerDeleteReleaseBundles)
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
+}
+
+func auth() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if len(c.GetHeader("Authorization")) == 0 {
+			httputil.NewError(c, http.StatusUnauthorized, errors.New("Authorization is required Header"))
+			c.Abort()
+		}
+		c.Next()
+	}
 }

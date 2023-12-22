@@ -107,8 +107,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "Bundle Version",
-                        "name": "bundlever",
+                        "description": "Bundle Name",
+                        "name": "BundleName",
                         "in": "query"
                     }
                 ],

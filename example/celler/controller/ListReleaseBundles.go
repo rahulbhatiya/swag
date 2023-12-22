@@ -96,14 +96,14 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 
 // VerDeleteReleaseBundles godoc
 
-// @Summary		Delete ReleaseBundles
-// @Description	DELETE Releasebundles
+// @Summary		    Delete ReleaseBundles
+// @Description	    DELETE Releasebundles
 // @Tags			DeleteReleaseBundles
 // @Accept			json
-// @Produce		json
+// @Produce		    json
 // @Param			username	query	string  false	"UserName"
 // @Param			pwd	        query	string  false	"Password"
-// @Param			bundlever	query	string  false	"Bundle Version"
+// @Param			BundleName	query	string  false	"Bundle Name"
 // @Success		200	{object}	string
 // @Failure		400	{object}	httputil.HTTPError
 // @Failure		404	{object}	httputil.HTTPError
@@ -113,11 +113,12 @@ func (c *Controller) VerDeleteReleaseBundles(ctx *gin.Context) {
 
 	username := ctx.Request.URL.Query().Get("username")
 	pwd := ctx.Request.URL.Query().Get("pwd")
+	bname := ctx.Request.URL.Query().Get("BundleName")
 
 	fmt.Println("Deleting Release Bundles List...")
 
 	// make GET request to API to get user by ID
-	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles/%s"
+	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles/" + bname
 	// request, error := http.NewRequest("GET", apiUrl, nil)
 	request, error := http.NewRequestWithContext(ctx, "DELETE", apiUrl, http.NoBody)
 
@@ -125,7 +126,7 @@ func (c *Controller) VerDeleteReleaseBundles(ctx *gin.Context) {
 		fmt.Println(error)
 	}
 
-	request.Header.Set("Content-Type", "application/json; charset=utf-8")
+	// request.Header.Set("Content-Type", "application/json; charset=utf-8")
 	request.SetBasicAuth(username, pwd)
 
 	client := &http.Client{}
