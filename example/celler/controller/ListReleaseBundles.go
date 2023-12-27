@@ -11,6 +11,9 @@ import (
 	"github.com/swaggo/swag/example/celler/model"
 )
 
+// Define the HTTPS_PROXY environment variable
+var httpsProxy = "socks5://localhost:7071"
+
 // ListReleaseBundles godoc
 //
 //	@Summary		List ReleaseBundles
@@ -33,7 +36,7 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	fmt.Println("Getting Release Bundles List...")
 
 	// Set proxy environment variables programmatically
-	os.Setenv("HTTPS_PROXY", "socks5://localhost:7071")
+	os.Setenv("HTTPS_PROXY", httpsProxy)
 
 	// make apiurl
 	apiUrl := "https://artifactory-main.yard-tst.telekom.de/artifactory/api/release/bundles"
