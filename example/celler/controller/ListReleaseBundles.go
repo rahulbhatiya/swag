@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/swag/example/celler/model"
+	"golang.org/x/net/proxy"
 )
 
 // ListReleaseBundles godoc
@@ -31,8 +32,13 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 
 	fmt.Println("Getting Release Bundles List...")
 
+	// ALL_PROXY := "socks5h://localhost:7071"
+
+	// Set the SOCKS5 proxy address
+	socksProxyURL := "localhost:7071"
+
 	// make GET request to API to get user by ID
-	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles"
+	apiUrl := "https://artifactory-main.yard-tst.telekom.de/artifactory/api/release/bundles"
 	// request, error := http.NewRequest("GET", apiUrl, nil)
 	request, error := http.NewRequestWithContext(ctx, "GET", apiUrl, http.NoBody)
 
@@ -43,7 +49,23 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	request.Header.Set("Content-Type", "application/json; charset=utf-8")
 	request.SetBasicAuth(username, pwd)
 
-	client := &http.Client{}
+	// Create a SOCKS5 proxy dialer
+	dialer, err := proxy.SOCKS5("tcp", socksProxyURL, nil, proxy.Direct)
+	if err != nil {
+		fmt.Println("Error creating SOCKS5 proxy dialer:", err)
+		return
+	}
+
+	// Create a new transport using the proxy dialer
+	transport := &http.Transport{
+		Dial: dialer.Dial,
+	}
+
+	// Create an HTTP client with the custom transport
+	client := &http.Client{
+		Transport: transport,
+	}
+	
 	response, error := client.Do(request)
 
 	if error != nil {
