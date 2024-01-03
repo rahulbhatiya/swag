@@ -12,7 +12,7 @@ import (
 )
 
 // Define the HTTPS_PROXY environment variable
-var httpsProxy = "socks5://localhost:7071"
+var httpsProxy = ""
 
 // ListReleaseBundles godoc
 //
@@ -39,7 +39,7 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 	os.Setenv("HTTPS_PROXY", httpsProxy)
 
 	// make apiurl
-	apiUrl := "https://artifactory-main.yard-tst.telekom.de/artifactory/api/release/bundles"
+	apiUrl := "https://artifactory-itg.test.devops.telekom.de/artifactory/api/release/bundles"
 
 	// request, error := http.NewRequest("GET", apiUrl, nil)
 	request, error := http.NewRequestWithContext(ctx, "GET", apiUrl, http.NoBody)
@@ -56,8 +56,8 @@ func (c *Controller) ListReleaseBundles(ctx *gin.Context) {
 		Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 		},
-	} 
-	
+	}
+
 	response, error := client.Do(request)
 
 	if error != nil {
@@ -132,7 +132,7 @@ func (c *Controller) VerDeleteReleaseBundles(ctx *gin.Context) {
 	fmt.Println("Deleting Release Bundles List...")
 
 	// make GET request to API to get user by ID
-	apiUrl := "https://artifactory.devops.telekom.de/artifactory/api/release/bundles/" + bname
+	apiUrl := "https://artifactory-itg.test.devops.telekom.de/artifactory/api/release/bundles/" + bname
 	// request, error := http.NewRequest("GET", apiUrl, nil)
 	request, error := http.NewRequestWithContext(ctx, "DELETE", apiUrl, http.NoBody)
 
